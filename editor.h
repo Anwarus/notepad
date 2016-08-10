@@ -21,6 +21,14 @@ public:
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();
 
+    void setHighlightedLineColor(QColor c){
+        highlightedLineColor = c;
+    }
+
+    void setNumberingSectionColor(QColor c){
+        numberingSectionColor = c;
+    }
+
 protected:
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 
@@ -31,6 +39,9 @@ private slots:
 
 private:
     QWidget *lineNumberArea;
+
+    QColor highlightedLineColor;
+    QColor numberingSectionColor;
 };
 
 class LineNumberArea : public QWidget

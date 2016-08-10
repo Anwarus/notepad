@@ -13,6 +13,9 @@ Editor::Editor(QWidget *parent) : QPlainTextEdit(parent)
 
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
+
+    highlightedLineColor = QColor(125, 125, 125);
+    numberingSectionColor = QColor(125, 125, 125);
 }
 
 
@@ -70,9 +73,7 @@ void Editor::highlightCurrentLine()
     if (!isReadOnly()) {
         QTextEdit::ExtraSelection selection;
 
-        QColor lineColor = QColor(102, 204, 255);
-
-        selection.format.setBackground(lineColor);
+        selection.format.setBackground(highlightedLineColor);
         selection.format.setProperty(QTextFormat::FullWidthSelection, true);
         selection.cursor = textCursor();
         selection.cursor.clearSelection();
@@ -87,7 +88,7 @@ void Editor::highlightCurrentLine()
 void Editor::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
     QPainter painter(lineNumberArea);
-    painter.fillRect(event->rect(), Qt::lightGray);
+    painter.fillRect(event->rect(), numberingSectionColor);
 
 
     QTextBlock block = firstVisibleBlock();
